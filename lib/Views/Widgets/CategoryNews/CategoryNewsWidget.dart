@@ -1,0 +1,108 @@
+import 'package:flutter/material.dart';
+import 'package:news_app/Views/Widgets/CategoryNews/CategoryNewsButton.dart';
+import 'package:news_app/Views/Widgets/CategoryNews/CategoryNewsCard.dart';
+
+var categories = [
+  "💻Technology",
+  "⚽Sports",
+  "💸Business",
+  "🍷Lifestyle"
+];
+
+var news = [{
+  "author": "Lawrence Bonk",
+  "title": "Venmo now lets you send crypto to other users for some reason",
+  "category": "Engadget",
+  "sourceUrl": "https://www.engadget.com/venmo-now-lets-you-send-crypto-to-other-users-for-some-reason-192015694.html",
+  "imageUrl": "https://s.yimg.com/uu/api/res/1.2/LKRH31mzL9wqtcqoQ_lkjw--~B/Zmk9ZmlsbDtoPTYzMDtweW9mZj0wO3c9MTIwMDthcHBpZD15dGFjaHlvbg--/https://media-mbst-pub-ue1.s3.amazonaws.com/creatr-uploaded-images/2023-04/835a5670-e5f4-11ed-9db6-3febf57b7a4a.cf.jpg",
+  "time": "2023-04-28",
+}
+,
+  {
+    "author": "Lawrence Bonk",
+    "title": "Venmo now lets you send crypto to other users for some reason",
+    "category": "Engadget",
+    "sourceUrl": "https://www.engadget.com/venmo-now-lets-you-send-crypto-to-other-users-for-some-reason-192015694.html",
+    "imageUrl": "https://s.yimg.com/uu/api/res/1.2/LKRH31mzL9wqtcqoQ_lkjw--~B/Zmk9ZmlsbDtoPTYzMDtweW9mZj0wO3c9MTIwMDthcHBpZD15dGFjaHlvbg--/https://media-mbst-pub-ue1.s3.amazonaws.com/creatr-uploaded-images/2023-04/835a5670-e5f4-11ed-9db6-3febf57b7a4a.cf.jpg",
+    "time": "2023-04-28",
+  }
+];
+
+
+class CategoryNewsWidget extends StatelessWidget {
+  const CategoryNewsWidget({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 5),
+                child: Text(
+                  "Category News",
+                  style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold
+                  ),
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 16, vertical: 5),
+                child: Text(
+                  "View All",
+                  style: TextStyle(
+                      color: Colors.grey[600],
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold
+                  ),
+                ),
+              ),
+            ],
+          ),
+          Container(
+            height: 50,
+            child: ListView.builder(
+                padding: const EdgeInsets.only(left: 8),
+                scrollDirection: Axis.horizontal,
+                itemCount: categories.length,
+                itemBuilder: (BuildContext context, int index){
+                  return CategoryNewsButton(category: categories[index]);
+                },
+            ),
+          ),
+          // CategoryNewsCard(
+          //     author: news[0]["author"].toString(),
+          //     title: news[0]["title"].toString(),
+          //     category: news[0]["category"].toString(),
+          //     time: news[0]["time"].toString(),
+          //     imageUrl: news[0]["imageUrl"].toString(),
+          //     sourceUrl: news[0]["sourceUrl"].toString()
+          // )
+          Expanded(
+            child: Container(
+              child: ListView.builder(
+                padding: const EdgeInsets.only(left: 8),
+                itemCount: news.length,
+                itemBuilder: (BuildContext context, int index){
+                  print(index);
+                  return CategoryNewsCard(
+                      author: news[index]["author"].toString(),
+                      title: news[index]["title"].toString(),
+                      category: news[index]["category"].toString(),
+                      time: news[index]["time"].toString(),
+                      imageUrl: news[index]["imageUrl"].toString(),
+                      sourceUrl: news[index]["sourceUrl"].toString()
+                  );
+                },
+              ),
+            ),
+          )
+        ],
+      ),
+    );
+  }
+}
